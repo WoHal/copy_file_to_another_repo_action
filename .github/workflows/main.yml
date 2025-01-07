@@ -30,10 +30,10 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_file: 'test01.md'
-        destination_repo: ${{ env.dest_repo }}
-        user_email: ${{ env.user_email }}
-        user_name: ${{ env.user_name }}
-        destination_folder: ${{ env.dest_folder }}
+        destination_repo: '${{ env.dest_repo }}'
+        user_email: '${{ env.user_email }}'
+        user_name: '${{ env.user_name }}'
+        destination_folder: '${{ env.dest_folder }}'
 
     - name: Push changed file
       uses: ./
@@ -41,10 +41,10 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_file: 'test02.md'
-        destination_repo: ${{ env.dest_repo }}
-        user_email: ${{ env.user_email }}
-        user_name: ${{ env.user_name }}
-        destination_folder: ${{ env.dest_folder }}
+        destination_repo: '${{ env.dest_repo }}'
+        user_email: '${{ env.user_email }}'
+        user_name: '${{ env.user_name }}'
+        destination_folder: '${{ env.dest_folder }}'
 
     - name: Check custom commit message
       uses: ./
@@ -52,10 +52,10 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_file: 'test03.md'
-        destination_repo: ${{ env.dest_repo }}
-        user_email: ${{ env.user_email }}
-        user_name: ${{ env.user_name }}
-        destination_folder: ${{ env.dest_folder }}
+        destination_repo: '${{ env.dest_repo }}'
+        user_email: '${{ env.user_email }}'
+        user_name: '${{ env.user_name }}'
+        destination_folder: '${{ env.dest_folder }}'
         commit_message: 'A custom message.'
 
     - name: Check rsync runs
@@ -64,10 +64,10 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_file: 'test04.md'
-        destination_repo: ${{ env.dest_repo }}
-        user_email: ${{ env.user_email }}
-        user_name: ${{ env.user_name }}
-        destination_folder: ${{ env.dest_folder }}
+        destination_repo: '${{ env.dest_repo }}'
+        user_email: '${{ env.user_email }}'
+        user_name: '${{ env.user_name }}'
+        destination_folder: '${{ env.dest_folder }}'
         use_rsync: 'true'
 
     - name: Push renamed file
@@ -76,10 +76,10 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_file: 'test02.md'
-        destination_repo: ${{ env.dest_repo }}
-        user_email: ${{ env.user_email }}
-        user_name: ${{ env.user_name }}
-        destination_folder: ${{ env.dest_folder }}
+        destination_repo: '${{ env.dest_repo }}'
+        user_email: '${{ env.user_email }}'
+        user_name: '${{ env.user_name }}'
+        destination_folder: '${{ env.dest_folder }}'
         rename: 'test02_rename.md'
 
     - name: Clean
@@ -88,8 +88,8 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_file: 'test05.md'
-        destination_repo: ${{ env.dest_repo }}
-        user_email: ${{ env.user_email }}
-        user_name: ${{ env.user_name }}
-        destination_folder: ${{ env.dest_folder }}
+        destination_repo: '${{ env.dest_repo }}'
+        user_email: '${{ env.user_email }}'
+        user_name: '${{ env.user_name }}'
+        destination_folder: '${{ env.dest_folder }}'
         clean_folder: 'true'

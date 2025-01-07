@@ -8,6 +8,11 @@ env:
 jobs:
   copy-file:
     runs-on: ubuntu-latest
+    env:
+      dest_repo: 'WoHal/just-test'
+      user_email: 'socianerr@gmail.com'
+      user_name: 'WoHal'
+      dest_folder: 'copy_file_test_github_action'
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -17,6 +22,7 @@ jobs:
         echo $GITHUB_SHA > test02.md
         echo $GITHUB_SHA > test03.md
         echo $GITHUB_SHA > test04.md
+        echo $GITHUB_SHA > test05.md
 
     - name: Ignore unchanged file
       uses: ./
@@ -24,9 +30,10 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_file: 'test01.md'
-        destination_repo: 'dmnemec/release-test'
-        user_email: 'devin.nemec@gmail.com'
-        user_name: 'dmnemec'
+        destination_repo: ${{ env.dest_repo }}
+        user_email: ${{ env.user_email }}
+        user_name: ${{ env.user_name }}
+        destination_folder: ${{ env.dest_folder }}
 
     - name: Push changed file
       uses: ./
@@ -34,9 +41,10 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_file: 'test02.md'
-        destination_repo: 'dmnemec/release-test'
-        user_email: 'devin.nemec@gmail.com'
-        user_name: 'dmnemec'
+        destination_repo: ${{ env.dest_repo }}
+        user_email: ${{ env.user_email }}
+        user_name: ${{ env.user_name }}
+        destination_folder: ${{ env.dest_folder }}
 
     - name: Check custom commit message
       uses: ./
@@ -44,9 +52,10 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_file: 'test03.md'
-        destination_repo: 'dmnemec/release-test'
-        user_email: 'devin.nemec@gmail.com'
-        user_name: 'dmnemec'
+        destination_repo: ${{ env.dest_repo }}
+        user_email: ${{ env.user_email }}
+        user_name: ${{ env.user_name }}
+        destination_folder: ${{ env.dest_folder }}
         commit_message: 'A custom message.'
 
     - name: Check rsync runs
@@ -55,9 +64,10 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_file: 'test04.md'
-        destination_repo: 'dmnemec/release-test'
-        user_email: 'devin.nemec@gmail.com'
-        user_name: 'dmnemec'
+        destination_repo: ${{ env.dest_repo }}
+        user_email: ${{ env.user_email }}
+        user_name: ${{ env.user_name }}
+        destination_folder: ${{ env.dest_folder }}
         use_rsync: 'true'
 
     - name: Push renamed file
@@ -66,7 +76,20 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_file: 'test02.md'
-        destination_repo: 'dmnemec/release-test'
-        user_email: 'devin.nemec@gmail.com'
-        user_name: 'dmnemec'
+        destination_repo: ${{ env.dest_repo }}
+        user_email: ${{ env.user_email }}
+        user_name: ${{ env.user_name }}
+        destination_folder: ${{ env.dest_folder }}
         rename: 'test02_rename.md'
+
+    - name: Clean
+      uses: ./
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source_file: 'test05.md'
+        destination_repo: ${{ env.dest_repo }}
+        user_email: ${{ env.user_email }}
+        user_name: ${{ env.user_name }}
+        destination_folder: ${{ env.dest_folder }}
+        clean_folder: 'true'

@@ -37,6 +37,12 @@ fi
 
 echo "Copying contents to git repo"
 mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER
+
+if [ ! -z "$INPUT_CLEAN_FOLDER" ]
+then
+  echo "deleting $DEST_COPY/$INPUT_SOURCE_FILE"
+  rm -rf $DEST_COPY/$INPUT_SOURCE_FILE || true
+fi
 if [ -z "$INPUT_USE_RSYNC" ]
 then
   cp -R "$INPUT_SOURCE_FILE" "$DEST_COPY"
